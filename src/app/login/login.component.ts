@@ -15,8 +15,8 @@ export class LoginComponent {
   loginError:String = "";
   loginForm =this.formBuilder.group(
     {
-      username:["",Validators.required],
-      password:["",Validators.required]
+      "clave":["",Validators.required],
+      "nombre":["",Validators.required]
     }
   );
 
@@ -31,10 +31,12 @@ export class LoginComponent {
         },
         error: (errorData: String) => {
           console.error(errorData);
+          alert("Algo ha ido mal");
           this.loginError=errorData;
         },
         complete: () => {
           console.info("Login completo");
+          alert("Inicio de sesión exitoso");
           this.router.navigateByUrl('');
           this.loginForm.reset();
         }

@@ -1,0 +1,83 @@
+.create-wrapper {
+  position: relative;
+  min-height: 80vh;
+  background-image: url('../../assets/imagenes/atril.png');
+  background-size:cover;
+  background-position: 0% 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.create-form {
+  background-color: rgba(255, 250, 240, 0.95);
+  border: 3px solid #8b0000;
+  padding: 2rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 500px;
+  font-family: 'Georgia', serif;
+}
+
+.create-form h2 {
+  text-align: center;
+  color: #002244;
+  margin-bottom: 1.5rem;
+}
+
+.create-form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.create-form input,
+.create-form textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.create-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.error {
+  color: #a80000;
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.create-form button {
+  display: block;
+  width: 100%;
+  background: linear-gradient(145deg, #ffe0e0, #e0f0ff);
+  border: 3px solid #8b0000;
+  color: #002244;
+  padding: 0.8rem;
+  border-radius: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  margin-top: 1rem;
+}
+
+.create-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.create-form button:hover:not(:disabled) {
+  background: #ffdede;
+  transform: scale(1.03);
+}

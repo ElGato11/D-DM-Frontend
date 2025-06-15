@@ -1,0 +1,39 @@
+<div class="create-wrapper">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="create-form">
+    <h2>➕ Crear nuevo conjuro</h2>
+
+    <label>
+      Nombre del conjuro
+      <input formControlName="nombreConjuro" placeholder="Ej: Bola de fuego" />
+    </label>
+    <div *ngIf="form.get('nombreConjuro')?.invalid && form.get('nombreConjuro')?.touched" class="error">
+      Obligatorio
+    </div>
+
+    <label>
+      Nivel
+      <input type="number" formControlName="nivel" min="0" />
+    </label>
+    <div *ngIf="form.get('nivel')?.invalid && form.get('nivel')?.touched" class="error">
+      Nivel inválido
+    </div>
+
+    <label>
+      Escuela
+      <input formControlName="escuela" placeholder="Ej: Evocación" />
+    </label>
+    <div *ngIf="form.get('escuela')?.invalid && form.get('escuela')?.touched" class="error">
+      Obligatorio
+    </div>
+
+    <label>
+      Efecto
+      <textarea formControlName="efecto" placeholder="Describe el efecto..."></textarea>
+    </label>
+    <div *ngIf="form.get('efecto')?.invalid && form.get('efecto')?.touched" class="error">
+      Obligatorio
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Crear conjuro</button>
+  </form>
+</div>

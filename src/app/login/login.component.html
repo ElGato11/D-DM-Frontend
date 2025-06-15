@@ -1,7 +1,7 @@
 <form [formGroup]="loginForm">
     <label class="form-label">Nombre</label>
-    <input class="form-control" formControlName="username" placeholder="nombre">
+    <input class="form-control" formControlName="nombre" placeholder="Nombre">
     <label class="form-label">Contraseña</label>
-    <input type="password" class="form-control" formControlName="password" placeholder="contraseña">
+    <input type="password" class="form-control" formControlName="clave" placeholder="Contraseña">
     <button type="submit" (click)="login()" class="btn btn-primary mt-3">Iniciar Sesión</button>
   </form>

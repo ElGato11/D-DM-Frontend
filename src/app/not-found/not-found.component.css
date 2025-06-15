@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.page-404 {
+  display: flex;
+  height: 90vh;
+  overflow: hidden;
+}
+
+.side {
+  width: 10vw;
+  background-image: url("../../assets/imagenes/jungla.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.side.left {
+  background-position: left center;
+}
+
+.side.right {
+  background-position: right center;
+}
+
+.main-content {
+  flex: 1;
+  background-color: #003c8f;
+  color: white;
+  font-family: 'Press Start 2P', monospace;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-left: 4px solid white;
+  border-right: 4px solid white;
+  outline: 3px solid #003c8f;
+  outline-offset: -10px;
+}
+
+.error-title {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.chocobo-img {
+  width: 300px;
+  margin-bottom: 2rem;
+}
+
+.error-message {
+  font-size: 0.8rem;
+  line-height: 1.8;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.return-btn {
+  background-color: white;
+  color: #003c8f;
+  padding: 0.8rem 1.5rem;
+  border: 3px solid #001f4f;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.7rem;
+  transition: all 0.2s ease;
+}
+
+.return-btn:hover {
+  background-color: #cce0ff;
+  color: #001f4f;
+  transform: scale(1.05);
+}

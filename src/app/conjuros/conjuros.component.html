@@ -1,0 +1,64 @@
+<div class="search-container">
+  <input
+    type="text"
+    [(ngModel)]="filtroNombre"
+    placeholder="Buscar conjuro..."
+    class="search-box"
+  />
+</div>
+
+<div class="conjuros-container">
+  <div *ngIf="isAdmin" class="admin-button">
+    <button class="create-btn" routerLink="/crear-conjuro">➕ Crear Conjuro</button>
+  </div>
+
+  <div
+    class="conjuro-card"
+    *ngFor="let conjuro of conjurosFiltrados()"
+    (click)="abrirModal(conjuro)"
+    [attr.data-name]="conjuro.nombreConjuro"
+  >
+    <div class="tooltip">{{ conjuro.nombreConjuro }}</div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="showModal" class="modal-overlay" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2 *ngIf="!editMode">{{ conjuroSeleccionado?.nombreConjuro }}</h2>
+
+    <div *ngIf="!editMode">
+      <p><strong>Efecto:</strong> {{ conjuroSeleccionado?.efecto }}</p>
+      <p><strong>Escuela:</strong> {{ conjuroSeleccionado?.escuela }}</p>
+      <p><strong>Nivel:</strong> {{ conjuroSeleccionado?.nivel }}</p>
+    </div>
+
+    <div *ngIf="editMode">
+      <label>
+        Nombre:
+        <input type="text" [(ngModel)]="conjuroEditado.nombreConjuro" />
+      </label>
+      <label>
+        Efecto:
+        <textarea [(ngModel)]="conjuroEditado.efecto"></textarea>
+      </label>
+      <label>
+        Escuela:
+        <input type="text" [(ngModel)]="conjuroEditado.escuela" />
+      </label>
+      <label>
+        Nivel:
+        <input type="number" [(ngModel)]="conjuroEditado.nivel" />
+      </label>
+    </div>
+
+    <div class="modal-buttons" *ngIf="isAdmin">
+      <button *ngIf="!editMode" (click)="activarEdicion()">Editar</button>
+      <button *ngIf="editMode" (click)="guardarCambios()">Guardar</button>
+      <button *ngIf="editMode" (click)="cancelarEdicion()">Cancelar</button>
+      <button (click)="borrarConjuro(conjuroSeleccionado?.idConjuro)">Borrar</button>
+    </div>
+
+    <button class="close-btn" (click)="cerrarModal()">Cerrar</button>
+  </div>
+</div>

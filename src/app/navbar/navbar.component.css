@@ -1,0 +1,129 @@
+.navbar {
+  background: linear-gradient(90deg, #e6f0ff, #ffe6e6);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: 20vh;
+  margin-right: 20vh;
+}
+
+.logo {
+  font-family: "UnifrakturCook", cursive;
+  font-weight: bold;
+  font-size: 2rem;
+  color: #003366;
+  text-decoration: none;
+  margin-right: 1.5rem;
+}
+
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.main-links {
+  list-style: none;
+  display: flex;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.main-links li a {
+  color: #003366;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.main-links li a:hover {
+  color: #336699;
+}
+
+.user-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.user-links li a {
+  color: #660000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.user-links li a:hover {
+  color: #993333;
+}
+
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #003366;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .container{
+   margin-left: 0vh;
+   margin-right: 0vh;
+  }
+
+  .main-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+    margin-left: auto;
+  }
+
+  .user-links {
+    width: 100%;
+    flex-direction: column;
+    background-color: #fbecec;
+    margin-top: 1rem;
+    padding: 1rem;
+    display: none;
+  }
+
+  .user-links.open {
+    display: flex;
+  }
+
+  .left-group {
+    flex: 1;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .user-links {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  flex-direction: column;
+  background-color: #fbecec;
+  width: 100%;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+}
+
+.user-links.open {
+  max-height: 500px;
+  padding: 1rem;
+}
+}

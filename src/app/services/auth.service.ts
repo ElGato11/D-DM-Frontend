@@ -13,14 +13,26 @@ export class AuthService {
     constructor(private http: HttpClient){}
 
     login(credentials: AuthRequest): Observable<String>{
-        return this.http.post<any>(this.apiUrl+"user/login",credentials).pipe(
-            tap( (userData) => {
-                sessionStorage.setItem("token", userData.token)
-              }),
-              map((userData)=> userData.token),
-              catchError(this.handleError)
-            );
+      return this.http.post<any>(this.apiUrl+"auth/login",credentials).pipe(
+        tap( (userData) => {
+            sessionStorage.setItem("token", userData.token)
+          }),
+          map((userData)=> userData.token),
+          catchError(this.handleError)
+        );
     }
+
+    isLoggedIn(): boolean {
+      if (typeof window !== 'undefined') {
+        return !!sessionStorage.getItem('token');
+      }
+      return false;
+}
+
+    logout(): void {
+      sessionStorage.removeItem("token");
+    }
+
 
     get userToken():String{
         return sessionStorage.getItem("token")||'';

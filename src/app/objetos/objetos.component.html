@@ -1,0 +1,40 @@
+<div class="search-container">
+  <input
+    type="text"
+    [(ngModel)]="filtroNombre"
+    placeholder="Buscar objeto..."
+    class="search-box"
+  />
+</div>
+
+<div class="objetos-container">
+  <div *ngIf="isAdmin" class="admin-button">
+    <button class="create-btn" routerLink="/crear-objeto">➕ Crear Objeto</button>
+  </div>
+
+  <div
+    class="objeto-card"
+    *ngFor="let objeto of objetosFiltrados(); let i = index"
+    [ngStyle]="{'background-image': 'url(assets/imagenes/' + obtenerFondoObjeto(i) + ')'}"
+    (click)="seleccionarObjeto(objeto)"
+    [attr.data-name]="objeto.nombre"
+  >
+    <div class="tooltip">{{ objeto.nombre }}</div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" *ngIf="objetoSeleccionado" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>{{ objetoSeleccionado.nombre }}</h2>
+    <p><strong>Tipo:</strong> {{ objetoSeleccionado.tipo }}</p>
+    <p><strong>Competencia:</strong> {{ objetoSeleccionado.necesitaCompetencia ? 'Sí' : 'No' }}</p>
+    <p *ngIf="objetoSeleccionado.danyo"><strong>Daño:</strong> {{ objetoSeleccionado.danyo }}</p>
+    <p><strong>Efecto:</strong> {{ objetoSeleccionado.efecto }}</p>
+
+    <div *ngIf="isAdmin" class="modal-actions">
+      <button (click)="editarObjeto()">✏️ Editar</button>
+      <button (click)="borrarObjeto()">🗑️ Borrar</button>
+    </div>
+  </div>
+</div>

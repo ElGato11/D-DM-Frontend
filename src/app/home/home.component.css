@@ -1,0 +1,108 @@
+.home-container {
+  background-image: url("../../assets/imagenes/tavern.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.welcome-box {
+  background-color: rgba(255, 250, 240, 0.95);
+  border: 3px solid #8b0000; 
+  padding: 2.5rem;
+  border-radius: 1.2rem;
+  max-width: 650px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+.welcome-box h1 {
+  font-size: 2.7rem;
+  color: #002244;
+  margin-bottom: 1.5rem;
+  font-family: 'Georgia', serif;
+}
+
+.welcome-box p {
+  font-size: 1.2rem;
+  color: #333;
+  line-height: 1.6;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.welcome-box .info {
+  margin-top: 1.5rem;
+  font-style: italic;
+  color: #8b0000;
+}
+
+.welcome-box .signature {
+  margin-top: 2rem;
+  color: #444;
+  font-family: 'Georgia', serif;
+}
+.link-buttons {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.home-btn {
+  background: linear-gradient(145deg, #ffe0e0, #e0f0ff);
+  border: 2px solid #8b0000;
+  color: #002244;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.8rem;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+  background: #ffdede;
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+#razas{
+    background-image: url("../../assets/imagenes/razas.png") ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#objetos{
+    background-image: url("../../assets/imagenes/horno.png") ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#clases{
+    background-image: url("../../assets/imagenes/armas.png") ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#conjuros{
+    background-image: url("../../assets/imagenes/libro\ magia.png") ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+span{
+    background-color: rgba(255, 250, 240, 0.7);
+    border-radius: 3px;
+}
+
