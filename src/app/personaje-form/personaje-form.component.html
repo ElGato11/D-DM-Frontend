@@ -1,0 +1,60 @@
+<div class="form-container">
+  <h2>{{ personajeId ? 'Editar Personaje' : 'Nuevo Personaje' }}</h2>
+
+  <form [formGroup]="personajeForm" (ngSubmit)="guardar()">
+    <div class="campo">
+      <label>Nombre:</label>
+      <input formControlName="nombre" />
+    </div>
+
+    <div class="campo">
+      <label>Descripción:</label>
+      <textarea formControlName="descripcion"></textarea>
+    </div>
+
+    <div class="estadisticas">
+      <div *ngFor="let stat of ['fuerza', 'destreza', 'constitucion', 'inteligencia', 'sabiduria', 'carisma']">
+        <label>{{ stat | titlecase }}</label>
+        <input type="number" [formControlName]="stat" />
+      </div>
+    </div>
+
+    <div class="campo">
+      <label>Nivel:</label>
+      <input type="number" formControlName="nivel" />
+    </div>
+
+    <div class="campo">
+      <label>Raza:</label>
+      <select formControlName="raza">
+        <option [ngValue]="null">-- Selecciona una --</option>
+        <option *ngFor="let r of razas" [ngValue]="r">{{ r.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Clases:</label>
+      <select formControlName="clases" multiple>
+        <option *ngFor="let c of clases" [ngValue]="c">{{ c.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Objetos:</label>
+      <select formControlName="objetos" multiple>
+        <option *ngFor="let o of objetos" [ngValue]="o">{{ o.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Imagen:</label>
+      <input type="file" (change)="onFileChange($event)" />
+      <img *ngIf="imagenPreview" [src]="imagenPreview" class="preview" />
+    </div>
+
+    <div class="acciones">
+      <button type="submit" [disabled]="personajeForm.invalid">Guardar</button>
+      <button type="button" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</div>

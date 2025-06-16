@@ -1,1 +1,89 @@
-<p>razas works!</p>
+<div class="search-container">
+  <input
+    type="text"
+    [(ngModel)]="filtroNombre"
+    (input)="aplicarFiltro()"
+    placeholder="Buscar raza..."
+    class="search-box"
+  />
+</div>
+
+<div class="carousel-container">
+  <div class="carousel" #carousel>
+    <div
+      class="raza-card"
+      *ngFor="let raza of razasFiltradas; let i = index"
+      [class.focused]="i === razaActualIndex"
+      #razaItem
+    >
+      <img *ngIf="raza.imagenRaza" [src]="raza.imagenRaza" alt="raza" />
+      <div class="tooltip">{{ raza.nombre }}</div>
+    </div>
+  </div>
+
+  <div class="carousel-controls">
+    <button (click)="cambiarRaza(-1)">◀</button>
+    <button (click)="cambiarRaza(1)">▶</button>
+  </div>
+</div>
+
+<div class="admin-button" *ngIf="isAdmin && !editando && !creando">
+  <button class="create-btn" (click)="iniciarCreacion()">➕ Crear Raza</button>
+</div>
+
+<!-- DETALLES -->
+<div class="modal-content" *ngIf="!creando && !editando && razaActual">
+  <h2>{{ razaActual.nombre }}</h2>
+  <img *ngIf="razaActual.imagenRaza" [src]="razaActual.imagenRaza" />
+
+  <h4>Modificadores:</h4>
+  <ul>
+    <li>Carisma: {{ razaActual.carismaMod }}</li>
+    <li>Fuerza: {{ razaActual.fuerzaMod }}</li>
+    <li>Inteligencia: {{ razaActual.inteligenciaMod }}</li>
+    <li>Sabiduría: {{ razaActual.sabiduriaMod }}</li>
+    <li>Constitución: {{ razaActual.constitucionMod }}</li>
+    <li>Destreza: {{ razaActual.destrezaMod }}</li>
+  </ul>
+
+  <h4>Ventajas:</h4>
+  <ul>
+    <li *ngFor="let v of razaActual.ventajas">{{ v.nombre }}</li>
+  </ul>
+
+  <div class="modal-buttons" *ngIf="isAdmin">
+    <button (click)="iniciarEdicion()">Editar</button>
+    <button (click)="borrarRaza()">Borrar</button>
+  </div>
+</div>
+
+<!-- FORMULARIO -->
+<div class="modal-content" *ngIf="editando || creando">
+  <label>Nombre:
+    <input [(ngModel)]="razaEdit.nombre" />
+  </label>
+
+  <label>Imagen:
+    <input type="file" (change)="actualizarImagen($event)" />
+  </label>
+  <div *ngIf="imagenBase64">
+    <img [src]="'data:image/*;base64,' + imagenBase64" class="preview-img" />
+  </div>
+
+  <h4>Modificadores:</h4>
+  <div *ngFor="let stat of stats">
+    <label>{{ stat.label }}:
+      <input type="number" [(ngModel)]="razaEdit[stat.key]" />
+    </label>
+  </div>
+
+  <h4>Ventajas:</h4>
+  <div *ngFor="let v of ventajas">
+    <input type="checkbox" [checked]="isSeleccionada(v.id)" (change)="toggleVentaja(v.id)" /> {{ v.nombre }}
+  </div>
+
+  <div class="modal-buttons">
+    <button (click)="guardar()">Guardar</button>
+    <button (click)="cancelar()">Cancelar</button>
+  </div>
+</div>

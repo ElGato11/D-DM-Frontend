@@ -1,8 +1,9 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { ConjuroService, Conjuro } from '../services/conjuro.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-conjuros',
@@ -13,57 +14,40 @@ import { RouterLink } from '@angular/router';
 })
 export class ConjurosComponent implements OnInit {
   isAdmin: boolean = false;
-  conjuros: any[] = [];
+  conjuros: Conjuro[] = [];
   filtroNombre: string = '';
 
-  // Variables para el modal
   showModal: boolean = false;
-  conjuroSeleccionado: any = null;
+  conjuroSeleccionado: Conjuro | null = null;
   editMode: boolean = false;
-  conjuroEditado: any = null;
+  conjuroEditado: Conjuro | null = null;
 
-  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    private conjuroService: ConjuroService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      const token = sessionStorage.getItem('token');
-      if (token) {
-        const payload = this.decodeToken(token);
-        this.isAdmin = payload?.rol === 'ADMIN';
-      }
-    }
-
+    this.isAdmin = this.authService.isAdmin();
     this.cargarConjuros();
   }
 
   cargarConjuros() {
-    this.http.get<any[]>('http://localhost:8080/public/conjuro')
-      .subscribe(data => {
-        this.conjuros = data;
-      });
-  }
-
-  decodeToken(token: string): any {
-    try {
-      const payloadBase64 = token.split('.')[1];
-      const decodedPayload = atob(payloadBase64);
-      return JSON.parse(decodedPayload);
-    } catch (e) {
-      console.error('Error al decodificar token:', e);
-      return null;
-    }
+    this.conjuroService.getConjuros().subscribe(data => {
+      this.conjuros = data;
+    });
   }
 
   conjurosFiltrados() {
-  const filtro = this.filtroNombre.toLowerCase();
-  return this.conjuros.filter(conjuro =>
-    conjuro.nombreConjuro.toLowerCase().includes(filtro) ||
-    (conjuro.escuela && conjuro.escuela.toLowerCase().includes(filtro)) ||
-    (conjuro.efecto && conjuro.efecto.toLowerCase().includes(filtro))
-  );
-}
+    const filtro = this.filtroNombre.toLowerCase();
+    return this.conjuros.filter(c =>
+      c.nombreConjuro.toLowerCase().includes(filtro) ||
+      (c.escuela && c.escuela.toLowerCase().includes(filtro)) ||
+      (c.efecto && c.efecto.toLowerCase().includes(filtro))
+    );
+  }
 
-  abrirModal(conjuro: any) {
+  abrirModal(conjuro: Conjuro) {
     this.conjuroSeleccionado = { ...conjuro };
     this.conjuroEditado = { ...conjuro };
     this.editMode = false;
@@ -78,45 +62,36 @@ export class ConjurosComponent implements OnInit {
 
   activarEdicion() {
     this.editMode = true;
-    this.conjuroEditado = { ...this.conjuroSeleccionado };
+    this.conjuroEditado = { ...this.conjuroSeleccionado! };
   }
 
   cancelarEdicion() {
     this.editMode = false;
-    this.conjuroEditado = { ...this.conjuroSeleccionado };
+    this.conjuroEditado = { ...this.conjuroSeleccionado! };
   }
 
   guardarCambios() {
     if (!this.conjuroEditado) return;
 
-    this.http.post<any>(
-      `http://localhost:8080/private/conjuro/actualizar/${this.conjuroEditado.idConjuro}`,
-      this.conjuroEditado
-    ).subscribe({
-      next: (updatedConjuro) => {
-        // Actualizar localmente
-        const index = this.conjuros.findIndex(c => c.idConjuro === updatedConjuro.idConjuro);
-        if (index !== -1) {
-          this.conjuros[index] = updatedConjuro;
-        }
-        this.conjuroSeleccionado = updatedConjuro;
-        this.editMode = false;
-      },
-      error: (err) => {
-        console.error('Error al actualizar conjuro', err);
-      }
-    });
+    this.conjuroService.actualizarConjuro(this.conjuroEditado.idConjuro, this.conjuroEditado)
+      .subscribe({
+        next: updated => {
+          const index = this.conjuros.findIndex(c => c.idConjuro === updated.idConjuro);
+          if (index !== -1) this.conjuros[index] = updated;
+          this.conjuroSeleccionado = updated;
+          this.editMode = false;
+        },
+        error: err => console.error('Error al actualizar conjuro', err)
+      });
   }
 
   borrarConjuro(id: number) {
-    this.http.post(`http://localhost:8080/private/conjuro/borrar/${id}`, {}).subscribe({
+    this.conjuroService.borrarConjuro(id).subscribe({
       next: () => {
         this.conjuros = this.conjuros.filter(c => c.idConjuro !== id);
         this.cerrarModal();
       },
-      error: (err) => {
-        console.error('Error al borrar conjuro', err);
-      }
+      error: err => console.error('Error al borrar conjuro', err)
     });
   }
 }

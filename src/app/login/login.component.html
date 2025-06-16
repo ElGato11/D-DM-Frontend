@@ -1,7 +1,23 @@
-<form [formGroup]="loginForm">
-    <label class="form-label">Nombre</label>
-    <input class="form-control" formControlName="nombre" placeholder="Nombre">
-    <label class="form-label">Contraseña</label>
-    <input type="password" class="form-control" formControlName="clave" placeholder="Contraseña">
-    <button type="submit" (click)="login()" class="btn btn-primary mt-3">Iniciar Sesión</button>
-  </form>
+<div class="login-background">
+  <div class="login-container medieval-theme">
+    <h2 class="title">Bienvenido al Reino</h2>
+
+    <form [formGroup]="loginForm">
+      <label class="form-label">Nombre de caballero</label>
+      <input class="form-control" formControlName="nombre" placeholder="Ej: Sir Lancelot" />
+
+      <label class="form-label">Contraseña secreta</label>
+      <input type="password" class="form-control" formControlName="clave" placeholder="Contraseña" />
+
+      <div *ngIf="loginError" class="error-message">{{ loginError }}</div>
+
+      <button type="submit" (click)="login()" [disabled]="!loginForm.valid" class="btn medieval-btn">
+        Entrar al castillo
+      </button>
+
+      <div class="register-link">
+        ¿No tienes cuenta? <a routerLink="/new-user">Forja una nueva</a>
+      </div>
+    </form>
+  </div>
+</div>

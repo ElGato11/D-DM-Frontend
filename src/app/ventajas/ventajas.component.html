@@ -1,0 +1,29 @@
+<div class="ventajas-page">
+  <h2>Gestión de Ventajas</h2>
+
+  <button (click)="iniciarCreacion()">➕ Nueva Ventaja</button>
+
+  <div *ngIf="creando || editando" class="formulario">
+    <label>Nombre:</label>
+    <input [(ngModel)]="ventajaEdit.nombre" type="text" />
+
+    <label>Descripción:</label>
+    <textarea [(ngModel)]="ventajaEdit.descripcion"></textarea>
+
+    <div class="acciones">
+      <button (click)="guardar()">Guardar</button>
+      <button (click)="cancelar()">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="ventaja-lista">
+    <div *ngFor="let ventaja of ventajas" class="ventaja-card">
+      <h4>{{ ventaja.nombre }}</h4>
+      <p>{{ ventaja.descripcion }}</p>
+      <div class="acciones">
+        <button (click)="iniciarEdicion(ventaja)">✏️ Editar</button>
+        <button (click)="borrar(ventaja.id)">🗑 Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>

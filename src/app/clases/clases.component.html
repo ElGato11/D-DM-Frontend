@@ -1,1 +1,103 @@
-<p>clases works!</p>
+<div class="search-container">
+  <input
+    type="text"
+    [(ngModel)]="filtroNombre"
+    (input)="aplicarFiltro()"
+    placeholder="Buscar clase..."
+    class="search-box"
+  />
+</div>
+
+<div class="carousel-container">
+  <div class="carousel" #carousel>
+    <div
+      class="clase-card"
+      *ngFor="let clase of clasesFiltradas; let i = index"
+      [class.focused]="i === claseActualIndex"
+    >
+      <img *ngIf="clase.imagenClase" [src]="clase.imagenClase" alt="clase" />
+      <div class="tooltip">{{ clase.nombreClase }}</div>
+    </div>
+  </div>
+
+  <div class="carousel-controls">
+    <button (click)="cambiarClase(-1)">◀</button>
+    <button (click)="cambiarClase(1)">▶</button>
+  </div>
+</div>
+
+<div class="admin-button" *ngIf="isAdmin && !editando && !creando">
+  <button class="create-btn" (click)="iniciarCreacion()">➕ Crear Clase</button>
+</div>
+
+
+<div class="modal-content" *ngIf="!creando && !editando && claseActual">
+  <h2>{{ claseActual.nombreClase }}</h2>
+  <img *ngIf="claseActual.imagenClase" [src]="claseActual.imagenClase" />
+
+  <h4>Ventajas:</h4>
+  <ul>
+    <li *ngFor="let v of claseActual.ventajas">{{ v.nombre }}</li>
+  </ul>
+
+  <h4>Conjuros:</h4>
+  <ul>
+    <li *ngFor="let c of claseActual.conjuros">{{ c.nombreConjuro }}</li>
+  </ul>
+
+  <h4>Competencias:</h4>
+  <ul>
+    <li *ngFor="let o of claseActual.competencias">{{ o.nombre }}</li>
+  </ul>
+
+  <div class="modal-buttons" *ngIf="isAdmin">
+    <button (click)="iniciarEdicion()">Editar</button>
+    <button (click)="borrarClase()">Borrar</button>
+  </div>
+</div>
+
+<!-- FORMULARIO -->
+<div class="modal-content" *ngIf="editando || creando">
+  <label>Nombre:
+    <input [(ngModel)]="claseEdit.nombreClase" />
+  </label>
+
+  <label>Imagen:
+    <input type="file" (change)="actualizarImagen($event)" />
+  </label>
+  <div *ngIf="imagenBase64">
+    <img [src]="'data:image/*;base64,' + imagenBase64" class="preview-img" />
+  </div>
+
+  <h4>Ventajas:</h4>
+  <div *ngFor="let v of ventajas">
+    <input
+      type="checkbox"
+      [checked]="isVentajaSeleccionada(v.id)"
+      (change)="toggleVentaja(v.id)"
+    /> {{ v.nombre }}
+  </div>
+
+  <h4>Conjuros:</h4>
+  <div *ngFor="let c of conjuros">
+    <input
+      type="checkbox"
+      [checked]="isConjuroSeleccionado(c.idConjuro)"
+      (change)="toggleConjuro(c.idConjuro)"
+    /> {{ c.nombreConjuro }}
+  </div>
+
+  <h4>Competencias:</h4>
+  <div *ngFor="let o of competencias">
+    <input
+    type="checkbox"
+    [checked]="isCompetenciaSeleccionada(o.id!)"
+    (change)="toggleCompetencia(o.id!)"
+  /> {{ o.nombre }}
+  </div>
+
+  <div class="modal-buttons">
+    <button (click)="guardar()">Guardar</button>
+    <button (click)="cancelar()">Cancelar</button>
+  </div>
+</div>

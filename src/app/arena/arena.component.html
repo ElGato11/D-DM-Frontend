@@ -1,0 +1,15 @@
+<h2 class="titulo">Arena de personajes</h2>
+
+<div class="crear-sala">
+  <input [(ngModel)]="nombreNuevaSala" placeholder="Nombre de la sala" />
+  <button (click)="crearSala()">Crear sala</button>
+</div>
+
+<div class="salas-lista">
+  <h3>Salas disponibles:</h3>
+  <div *ngFor="let s of salas" class="sala-card">
+    <p><strong>{{ s.nombre }}</strong></p>
+    <p>Host: {{ s.host?.nombre }}</p>
+    <button (click)="unirse(s.id)">Unirse</button>
+  </div>
+</div>

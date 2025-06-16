@@ -1,0 +1,33 @@
+<h2 class="titulo">Sala: {{ sala?.nombre }}</h2>
+
+<div class="sala-info" *ngIf="sala">
+  <div class="jugador">
+    <p><strong>Host:</strong> {{ sala.host?.nombre }}</p>
+    <p *ngIf="sala.personajeHost">🧙 {{ sala.personajeHost.nombre }}</p>
+  </div>
+
+  <div class="jugador">
+    <p><strong>Jugador 2:</strong> {{ sala.jugador2?.nombre || 'Esperando...' }}</p>
+    <p *ngIf="sala.personajeJugador2">🗡️ {{ sala.personajeJugador2.nombre }}</p>
+  </div>
+
+  <div class="selector" *ngIf="personajes.length && !asignado">
+    <label>Selecciona tu personaje:</label>
+    <select [(ngModel)]="personajeSeleccionado">
+      <option [ngValue]="null">-- Selecciona uno --</option>
+      <option *ngFor="let p of personajes" [ngValue]="p.idPersonaje">
+        {{ p.nombre }}
+      </option>
+    </select>
+    <button (click)="asignarPersonaje()" [disabled]="!personajeSeleccionado">Asignar</button>
+  </div>
+
+  <button class="salir" (click)="salir()">Salir</button>
+  <button
+    *ngIf="sala.personajeHost && sala.personajeJugador2"
+    class="combatir"
+    (click)="combatir()">
+    ⚔️ Combatir
+  </button>
+
+</div>

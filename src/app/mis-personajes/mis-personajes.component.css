@@ -1,0 +1,87 @@
+:host {
+  display: block;
+  padding: 2rem;
+  background-color: #f0f0e6;
+  font-family: 'Garamond', serif;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #3b2f2f;
+}
+
+button[routerLink] {
+  display: block;
+  margin: 0 auto 2rem auto;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #7b3e19;
+  color: #fceabb;
+  border: 2px solid #5c2e10;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button[routerLink]:hover {
+  background-color: #9b4e24;
+}
+
+.lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.personaje-card {
+  background: linear-gradient(135deg, #fff8e1, #f1e2c5);
+  border: 2px solid #d1bfa4;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(97, 75, 33, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.personaje-card:hover {
+  transform: scale(1.02);
+}
+
+.personaje-card img {
+  max-height: 140px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #b89b72;
+}
+
+.personaje-card h4 {
+  font-size: 1.4rem;
+  margin: 10px 0 5px;
+  color: #4b321b;
+}
+
+.personaje-card p {
+  font-size: 1rem;
+  color: #5c3a1d;
+  margin: 4px 0;
+}
+
+.personaje-card button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #5c3a1d;
+  color: #f9f1dc;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.personaje-card button:hover {
+  background-color: #7b5233;
+}

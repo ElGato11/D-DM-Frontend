@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { PLATFORM_ID, Inject } from '@angular/core';
+import { PLATFORM_ID } from '@angular/core';
+
+import { ConjuroService, Conjuro } from '../services/conjuro.service';
 
 @Component({
   selector: 'app-crear-conjuro',
@@ -19,11 +20,12 @@ export class CrearConjuroComponent implements OnInit {
     escuela: ['', Validators.required],
     efecto: ['', Validators.required]
   });
+
   isBrowser: boolean;
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
+    private conjuroService: ConjuroService, 
     private router: Router,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
@@ -35,7 +37,9 @@ export class CrearConjuroComponent implements OnInit {
   onSubmit() {
     if (!this.isBrowser || this.form.invalid) return;
 
-    this.http.post('http://localhost:8080/private/conjuro/crear', this.form.value)
+    const nuevoConjuro: Conjuro = this.form.value as Conjuro;
+
+    this.conjuroService.crearConjuro(nuevoConjuro)
       .subscribe({
         next: () => {
           alert('Conjuro creado con éxito');

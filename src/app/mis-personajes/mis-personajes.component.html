@@ -1,1 +1,11 @@
-<p>mis-personajes works!</p>
+<h2>Mis personajes</h2>
+<button routerLink="/personaje-form">Crear nuevo personaje</button>
+
+<div class="lista">
+  <div class="personaje-card" *ngFor="let p of personajes">
+    <img *ngIf="p.imagenPersonaje" [src]="'data:image/jpeg;base64,' + p.imagenPersonaje" />
+    <h4>{{ p.nombre }}</h4>
+    <p>Raza: {{ p.raza?.nombre || 'Ninguna' }}</p>
+    <button [routerLink]="['/personaje-form', p.idPersonaje]">Editar</button>
+  </div>
+</div>

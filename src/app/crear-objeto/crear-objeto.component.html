@@ -1,0 +1,33 @@
+<div class="full-wrapper">
+  <img src="../../assets/imagenes/forja.gif" alt="Decoración izquierda" class="side-img left" />
+  
+  <div class="form-container">
+    <h2>Crear Objeto</h2>
+
+    <form (ngSubmit)="crearObjeto()" #objetoForm="ngForm">
+      <label>Nombre*</label>
+      <input type="text" [(ngModel)]="objeto.nombre" name="nombre" required />
+
+      <label>Tipo*</label>
+      <input type="text" [(ngModel)]="objeto.tipo" name="tipo" required />
+
+      <label>¿Requiere competencia?*</label>
+      <select [(ngModel)]="objeto.necesitaCompetencia" name="necesitaCompetencia" required>
+        <option [ngValue]="true">Sí</option>
+        <option [ngValue]="false">No</option>
+      </select>
+
+      <label>Daño (opcional)</label>
+      <input type="text" [(ngModel)]="objeto.danyo" name="danyo" placeholder="Ej: 1D6" />
+
+      <label>Efecto*</label>
+      <textarea [(ngModel)]="objeto.efecto" name="efecto" rows="4" required></textarea>
+
+      <button type="submit">Crear Objeto</button>
+    </form>
+
+    <p class="mensaje">{{ mensaje }}</p>
+  </div>
+
+  <img src="../../assets/imagenes/forja.gif" alt="Decoración derecha" class="side-img right" />
+</div>

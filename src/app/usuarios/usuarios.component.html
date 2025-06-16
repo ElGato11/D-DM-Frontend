@@ -1,0 +1,47 @@
+<div class="usuarios-page">
+  <h2>Gestión de Usuarios</h2>
+
+  <button (click)="iniciarCreacion()">➕ Nuevo Usuario</button>
+
+  <div *ngIf="creando || editando" class="formulario">
+    <label>Nombre:</label>
+    <input [(ngModel)]="usuarioEdit.nombre" type="text" />
+
+    <div *ngIf="creando">
+      <label>Tipo de usuario:</label>
+      <select [(ngModel)]="crearComoAdmin">
+        <option [ngValue]="false">Usuario</option>
+        <option [ngValue]="true">Administrador</option>
+      </select>
+    </div>
+
+    <div class="acciones">
+      <button (click)="guardar()">Guardar</button>
+      <button (click)="cancelar()">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="usuario-lista">
+    <div *ngFor="let usuario of usuarios" class="usuario-card">
+      <h4>{{ usuario.nombre }}</h4>
+
+      <div *ngIf="editandoClaveId === usuario.id" class="formulario">
+        <label>Nueva contraseña:</label>
+        <input [(ngModel)]="nuevaClave" type="password" />
+        <label>Repetir contraseña:</label>
+        <input [(ngModel)]="repetirClave" type="password" />
+
+        <div class="acciones">
+          <button (click)="guardarCambioClave()">Guardar</button>
+          <button (click)="cancelarCambioClave()">Cancelar</button>
+        </div>
+      </div>
+
+      <div *ngIf="editandoClaveId !== usuario.id" class="acciones">
+        <button (click)="iniciarEdicion(usuario)">✏️ Editar</button>
+        <button (click)="borrar(usuario.id)">🗑 Borrar</button>
+        <button (click)="iniciarCambioClave(usuario.id)">🔐 Cambiar Contraseña</button>
+      </div>
+    </div>
+  </div>
+</div>

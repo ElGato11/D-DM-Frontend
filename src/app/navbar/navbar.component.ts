@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service'; // Asegúrate de ajustar el path si es necesario
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +11,8 @@ import { AuthService } from '../services/auth.service'; // Asegúrate de ajustar
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-   menuOpen = false;
+  menuOpen = false;
+
   constructor(public authService: AuthService, private router: Router) {}
 
   toggleMenu() {
@@ -23,4 +24,3 @@ export class NavbarComponent {
     this.router.navigate(['/']);
   }
 }
-

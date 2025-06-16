@@ -1,0 +1,73 @@
+.titulo {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.sala-info {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f4f4f4;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.jugador {
+  display: inline-block;
+  width: 45%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.selector {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.salir {
+  background-color: #c0392b;
+  color: white;
+  margin-top: 25px;
+}
+
+.salir:hover {
+  background-color: #922b21;
+}
+
+.combatir {
+  background-color: #27ae60;
+  color: white;
+  margin-top: 15px;
+}
+
+.combatir:hover {
+  background-color: #1e8449;
+}

@@ -1,1 +1,16 @@
-<p>new-user works!</p>
+<div class="new-user-container medieval-theme">
+  <h2 class="title">Forja tu cuenta</h2>
+
+  <form [formGroup]="userForm">
+    <label class="form-label">Nombre</label>
+    <input class="form-control" formControlName="nombre" placeholder="Nombre de usuario" />
+
+    <label class="form-label">Contraseña</label>
+    <input type="password" class="form-control" formControlName="clave" placeholder="Contraseña" />
+
+    <div *ngIf="creationMessage" class="success-message">{{ creationMessage }}</div>
+    <div *ngIf="creationError" class="error-message">{{ creationError }}</div>
+
+    <button type="button" class="btn medieval-btn" (click)="crearUsuario()">Crear Usuario</button>
+  </form>
+</div>

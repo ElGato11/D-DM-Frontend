@@ -1,0 +1,97 @@
+.form-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+  background: linear-gradient(to bottom right, #fffaf2, #f6eddc);
+  border: 2px solid #c2aa8d;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(60, 40, 20, 0.2);
+  font-family: 'Garamond', serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  color: #4b321b;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #3e2c1c;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #b59c7d;
+  border-radius: 6px;
+  background-color: #fcf8f2;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+select[multiple] {
+  height: 100px;
+}
+
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.estadisticas div {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview {
+  max-height: 140px;
+  margin-top: 10px;
+  border: 1px solid #aa9473;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.acciones {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #7b3e19;
+  color: #fef3d4;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #9b4e24;
+}
