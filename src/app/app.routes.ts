@@ -9,6 +9,7 @@ import { MisPersonajesComponent } from './mis-personajes/mis-personajes.componen
 import { NotFoundComponent } from './not-found/not-found.component';
 import { authGuard } from './guards/auth.guard';
 import { noAuthGuard } from './guards/no-auth.guard';
+import { adminGuard } from './guards/admin.guard';
 import { HomeComponent } from './home/home.component';
 import { CrearConjuroComponent } from './crear-conjuro/crear-conjuro.component';
 import { CrearObjetoComponent } from './crear-objeto/crear-objeto.component';
@@ -18,23 +19,26 @@ import { PersonajeFormComponent } from './personaje-form/personaje-form.componen
 import { ArenaComponent } from './arena/arena.component';
 import { SalaComponent } from './sala/sala.component';
 
-
 export const routes: Routes = [
-{ path: '', component: HomeComponent },
-{ path: 'razas', component: RazasComponent },
-{ path: 'crear-conjuro', component: CrearConjuroComponent },
-{ path: 'usuarios', component: UsuariosComponent },
-{ path: 'ventajas', component: VentajasComponent },
-{ path: 'crear-objeto', component: CrearObjetoComponent },
-{ path: 'objetos', component: ObjetosComponent },
-{ path: 'clases', component: ClasesComponent },
-{ path: 'conjuros', component: ConjurosComponent },
-{ path: 'login', component: LoginComponent, canActivate: [noAuthGuard] },
-{ path: 'new-user', component: NewUserComponent, canActivate: [noAuthGuard] },
-{ path: 'mis-personajes', component: MisPersonajesComponent, canActivate: [authGuard] },
-{ path: 'personaje-form', component: PersonajeFormComponent },
-{ path: 'personaje-form/:id', component: PersonajeFormComponent },
-{ path: 'arena', component: ArenaComponent },
-{ path: 'arena/:id', component: SalaComponent },
-{ path: '**', component: NotFoundComponent }
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent, canActivate: [noAuthGuard] },
+  { path: 'new-user', component: NewUserComponent, canActivate: [noAuthGuard] },
+
+  { path: 'razas', component: RazasComponent },
+  { path: 'objetos', component: ObjetosComponent },
+  { path: 'clases', component: ClasesComponent },
+  { path: 'conjuros', component: ConjurosComponent },
+  { path: 'ventajas', component: VentajasComponent },
+
+  { path: 'mis-personajes', component: MisPersonajesComponent, canActivate: [authGuard] },
+  { path: 'personaje-form', component: PersonajeFormComponent, canActivate: [authGuard] },
+  { path: 'personaje-form/:id', component: PersonajeFormComponent, canActivate: [authGuard] },
+  { path: 'arena', component: ArenaComponent, canActivate: [authGuard] },
+  { path: 'arena/:id', component: SalaComponent, canActivate: [authGuard] },
+
+  { path: 'usuarios', component: UsuariosComponent, canActivate: [authGuard] },
+  { path: 'crear-conjuro', component: CrearConjuroComponent, canActivate: [authGuard, adminGuard] },
+  { path: 'crear-objeto', component: CrearObjetoComponent, canActivate: [authGuard, adminGuard] },
+
+  { path: '**', component: NotFoundComponent }
 ];

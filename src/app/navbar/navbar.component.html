@@ -18,10 +18,15 @@
         <li><a routerLink="/login">Iniciar Sesión</a></li>
         <li><a routerLink="/new-user">Crear Usuario</a></li>
       </ng-container>
+
       <ng-container *ngIf="authService.isLoggedIn()">
         <li><a routerLink="/mis-personajes">Mis Personajes</a></li>
-        <li *ngIf="authService.isAdmin()"><a routerLink="/usuarios">Usuarios</a></li>
-        <li class="arena-link" *ngIf="authService.isLoggedIn()">
+        <li>
+          <a routerLink="/usuarios">
+            {{ authService.isAdmin() ? 'Usuarios' : 'Mi perfil' }}
+          </a>
+        </li>
+        <li class="arena-link">
           <a routerLink="/arena">⚔️Arena⚔️</a>
         </li>
         <li><a href="#" (click)="logout()">Cerrar Sesión</a></li>

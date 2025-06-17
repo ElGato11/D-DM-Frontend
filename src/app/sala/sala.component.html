@@ -23,11 +23,49 @@
   </div>
 
   <button class="salir" (click)="salir()">Salir</button>
+
   <button
-    *ngIf="sala.personajeHost && sala.personajeJugador2"
+    *ngIf="sala.personajeHost && sala.personajeJugador2 && !enCombate"
     class="combatir"
     (click)="combatir()">
     ⚔️ Combatir
   </button>
+</div>
 
+<!-- OVERLAY DE COMBATE -->
+<div class="combate-overlay" *ngIf="enCombate">
+  <div class="combate-contenedor">
+    <h2>⚔️ Combate en curso</h2>
+
+    <div class="personajes-combate">
+      <div class="personaje-combate">
+        <h3>{{ sala.personajeHost.nombre }}</h3>
+        <p>HP: {{ hpHost }}</p>
+      </div>
+      <div class="personaje-combate">
+        <h3>{{ sala.personajeJugador2.nombre }}</h3>
+        <p>HP: {{ hpJugador2 }}</p>
+      </div>
+    </div>
+
+    <p>
+      Turno actual:
+      <strong>
+        {{ turnoActual === 'host' ? sala.host.nombre : sala.jugador2?.nombre }}
+      </strong>
+    </p>
+
+    <button *ngIf="miTurno" (click)="atacar()" class="btn-atacar">🗡️ Atacar</button>
+    <div *ngIf="miTurno && objetosDisponibles.length" class="objetos-combate">
+      <h4>🎒 Objetos</h4>
+      <ul>
+        <li *ngFor="let obj of objetosDisponibles">
+          <strong>{{ obj.nombre }}</strong> ({{ obj.danyo }})
+          <button (click)="usarObjeto(obj)" [disabled]="!puedeUsar(obj)">Usar</button>
+        </li>
+      </ul>
+    </div>
+
+    <p *ngIf="!miTurno">Esperando al oponente...</p>
+  </div>
 </div>

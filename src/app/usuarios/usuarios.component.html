@@ -1,13 +1,22 @@
 <div class="usuarios-page">
   <h2>Gestión de Usuarios</h2>
 
-  <button (click)="iniciarCreacion()">➕ Nuevo Usuario</button>
+  <button *ngIf="isAdmin" (click)="iniciarCreacion()">➕ Nuevo Usuario</button>
 
   <div *ngIf="creando || editando" class="formulario">
     <label>Nombre:</label>
     <input [(ngModel)]="usuarioEdit.nombre" type="text" />
+    <br>
 
-    <div *ngIf="creando">
+    <div *ngIf="isAdmin">
+      <label>Rol:</label>
+      <select [(ngModel)]="usuarioEdit.rol" class="form-select">
+        <option value="USER">Usuario</option>
+        <option value="ADMIN">Administrador</option>
+      </select>
+    </div>
+
+    <div *ngIf="creando && isAdmin">
       <label>Tipo de usuario:</label>
       <select [(ngModel)]="crearComoAdmin">
         <option [ngValue]="false">Usuario</option>
@@ -25,9 +34,12 @@
     <div *ngFor="let usuario of usuarios" class="usuario-card">
       <h4>{{ usuario.nombre }}</h4>
 
+      <p *ngIf="isAdmin">Rol: {{ usuario.rol }}</p>
+
       <div *ngIf="editandoClaveId === usuario.id" class="formulario">
         <label>Nueva contraseña:</label>
         <input [(ngModel)]="nuevaClave" type="password" />
+        <br>
         <label>Repetir contraseña:</label>
         <input [(ngModel)]="repetirClave" type="password" />
 
@@ -37,10 +49,10 @@
         </div>
       </div>
 
-      <div *ngIf="editandoClaveId !== usuario.id" class="acciones">
-        <button (click)="iniciarEdicion(usuario)">✏️ Editar</button>
-        <button (click)="borrar(usuario.id)">🗑 Borrar</button>
-        <button (click)="iniciarCambioClave(usuario.id)">🔐 Cambiar Contraseña</button>
+      <div *ngIf="usuario.nombre === nombreUsuarioActual" class="acciones">
+        <button *ngIf="isAdmin || usuario.id === idUsuarioActual" (click)="iniciarEdicion(usuario)">✏️ Editar</button>
+        <button *ngIf="isAdmin" (click)="borrar(usuario.id)">🗑 Borrar</button>
+        <button *ngIf="isAdmin || usuario.id === idUsuarioActual" (click)="iniciarCambioClave(usuario.id)">🔐 Cambiar Contraseña</button>
       </div>
     </div>
   </div>

@@ -20,30 +20,36 @@
     </div>
 
     <div class="campo">
-      <label>Nivel:</label>
-      <input type="number" formControlName="nivel" />
-    </div>
-
-    <div class="campo">
-      <label>Raza:</label>
-      <select formControlName="raza">
-        <option [ngValue]="null">-- Selecciona una --</option>
+      <label>Razas:</label>
+      <select formControlName="razas" multiple>
         <option *ngFor="let r of razas" [ngValue]="r">{{ r.nombre }}</option>
       </select>
     </div>
 
     <div class="campo">
       <label>Clases:</label>
-      <select formControlName="clases" multiple>
-        <option *ngFor="let c of clases" [ngValue]="c">{{ c.nombre }}</option>
-      </select>
+      <div class="checkbox-group">
+        <label *ngFor="let c of clases">
+          <input type="checkbox"
+                 [value]="c.id"
+                 (change)="onCheckboxChange($event, 'clases')"
+                 [checked]="personajeForm.get('clases')?.value.includes(c.id)" />
+          {{ c.nombre }}
+        </label>
+      </div>
     </div>
 
     <div class="campo">
       <label>Objetos:</label>
-      <select formControlName="objetos" multiple>
-        <option *ngFor="let o of objetos" [ngValue]="o">{{ o.nombre }}</option>
-      </select>
+      <div class="checkbox-group">
+        <label *ngFor="let o of objetos">
+          <input type="checkbox"
+                 [value]="o.id"
+                 (change)="onCheckboxChange($event, 'objetos')"
+                 [checked]="personajeForm.get('objetos')?.value.includes(o.id)" />
+          {{ o.nombre }}
+        </label>
+      </div>
     </div>
 
     <div class="campo">

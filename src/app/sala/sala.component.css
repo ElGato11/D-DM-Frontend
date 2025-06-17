@@ -71,3 +71,98 @@ button {
 .combatir:hover {
   background-color: #1e8449;
 }
+
+.overlay-combate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 15, 0.95);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+}
+
+.combate-info {
+  text-align: center;
+}
+
+.combatientes {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.personaje {
+  flex: 1;
+  margin: 0 20px;
+}
+
+.acciones-combate button {
+  font-size: 1.2em;
+  padding: 10px 20px;
+  margin-top: 15px;
+}
+
+.combate-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 15, 15, 0.9);
+  color: white;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.combate-contenedor {
+  text-align: center;
+  padding: 2rem;
+  background: #222;
+  border: 2px solid #555;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+  max-width: 500px;
+}
+
+.personaje-combate {
+  margin: 1rem 0;
+}
+
+.btn-atacar {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #8B0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.objetos-combate {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #222;
+  border: 1px solid #555;
+  border-radius: 10px;
+  color: white;
+}
+.objetos-combate ul {
+  list-style: none;
+  padding: 0;
+}
+.objetos-combate li {
+  margin-bottom: 10px;
+}
+.objetos-combate button {
+  margin-left: 10px;
+}

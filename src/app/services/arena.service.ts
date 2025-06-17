@@ -15,11 +15,11 @@ export class ArenaService {
   }
 
   crearSala(nombre: string): Observable<any> {
-    return this.http.post(`${API}/crear`, { nombre });
+    return this.http.post<any>(`${API}/crear`, { nombre });
   }
 
   unirseSala(id: number): Observable<any> {
-    return this.http.post(`${API}/unirse/${id}`, {});
+    return this.http.post<any>(`${API}/unirse/${id}`, {});
   }
 
   salirSala(id: number): Observable<void> {
@@ -27,10 +27,18 @@ export class ArenaService {
   }
 
   getSala(id: number): Observable<any> {
-    return this.http.get(`${API}/${id}`);
+    return this.http.get<any>(`${API}/${id}`);
   }
 
   asignarPersonaje(salaId: number, personajeId: number): Observable<any> {
-    return this.http.post(`${API}/${salaId}/asignar-personaje`, { personajeId });
+    return this.http.post<any>(`${API}/${salaId}/asignar-personaje`, { personajeId });
+  }
+
+  iniciarCombate(salaId: number): Observable<any> {
+    return this.http.post<any>(`${API}/${salaId}/iniciar-combate`, {});
+  }
+
+  atacar(salaId: number, atacante: 'host' | 'jugador2'): Observable<any> {
+    return this.http.post<any>(`${API}/${salaId}/atacar`, { atacante });
   }
 }

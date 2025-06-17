@@ -9,7 +9,6 @@ export interface Personaje {
   idPersonaje?: number;
   nombre: string;
   descripcion?: string;
-  nivel: number;
 
   fuerza: number;
   destreza: number;
